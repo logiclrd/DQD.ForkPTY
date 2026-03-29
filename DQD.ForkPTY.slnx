@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DQD.ForkPTY.Playground/DQD.ForkPTY.Playground.csproj" />
+  <Project Path="DQD.ForkPTY/DQD.ForkPTY.csproj" />
+</Solution>
