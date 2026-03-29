@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>DQD.ForkPTY</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>logiclrd</Authors>
     <PackageDescription>.NET library exposing forkpty() functionality across multiple platforms</PackageDescription>
     <RepositoryUrl>https://github.com/logiclrd/DQD.ForkPTY</RepositoryUrl>
@@ -20,11 +20,11 @@
   <ItemGroup>
     <Content Include="../README.md" Pack="true" PackagePath="\" />
     <Content Include="../LICENSE.md" Pack="true" PackagePath="\" />
-    <None Include="../NativeBinaries/*">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	<Pack>true</Pack>
-	<PackagePath>contentFiles\any\any</PackagePath>
-	<PackageCopyToOutput>true</PackageCopyToOutput>
+    <None Include="../NativeBinaries/runtimes/**/*" LinkBase="runtimes\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>runtimes</PackagePath>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </None>
   </ItemGroup>
 

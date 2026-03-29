@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Runtime.Versioning;
 
 using DQD.ForkPTY;
 
+[UnsupportedOSPlatform("Windows")]
 class Program
 {
 	static void Main()
@@ -48,11 +49,16 @@ class Program
 		{
 			var receiveTask = Task.Run(() => result.PTYStream.CopyTo(Console.OpenStandardOutput()));
 			var sendTask = Task.Run(() => Console.OpenStandardInput().CopyTo(result.PTYStream));
-			var waitTask = Task.Run(() => Process.GetProcessById(result.ChildProcessID).WaitForExit());
+
+			Console.WriteLine("Waiting for process exit");
+
+			result.ProcessExit.WaitOne();
+
+			Console.WriteLine("Process exited, waiting on I/O tasks");
 
 			try
 			{
-				Task.WaitAny(receiveTask, sendTask, waitTask);
+				Task.WaitAny(receiveTask, sendTask);
 			}
 			catch (AggregateException e)
 			{
