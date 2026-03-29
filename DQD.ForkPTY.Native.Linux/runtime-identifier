@@ -1,0 +1,9 @@
+#!/bin/bash
+
+arch=$(uname -m)
+
+case $arch in
+	x86_64) echo linux-x64;;
+	aarch64) echo linux-arm64;;
+	*) echo Unrecognized: $arch >&2; exit 1;;
+esac
