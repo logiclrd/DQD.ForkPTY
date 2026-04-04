@@ -1,0 +1,3 @@
+[*.cs, *.c]
+indent_style = tabs
+
