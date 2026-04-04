@@ -35,6 +35,17 @@ public static class Forker
 				argv,
 				out masterFD);
 		}
+		else if (RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
+		{
+			childPTY = NativeMethods.FreeBSD.forkpty_exec(
+				configuration.CharacterSize.Width,
+				configuration.CharacterSize.Height,
+				configuration.PixelSize.Width,
+				configuration.PixelSize.Height,
+				fileName,
+				argv,
+				out masterFD);
+		}
 		else
 			throw new PlatformNotSupportedException();
 

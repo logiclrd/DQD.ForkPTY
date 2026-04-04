@@ -5,8 +5,38 @@ using DQD.ForkPTY;
 [UnsupportedOSPlatform("Windows")]
 class Program
 {
+	static string FindShell()
+	{
+		string[] candidates = [ "bash", "csh", "zsh", "ash" ];
+		string[] possiblePaths = [ "/usr/bin", "/usr/sbin", "/bin" ];
+
+		const UnixFileMode AnyExecute =
+			UnixFileMode.UserExecute |
+			UnixFileMode.GroupExecute |
+			UnixFileMode.OtherExecute;
+
+		foreach (string candidate in candidates)
+		{
+			foreach (var container in possiblePaths)
+			{
+				string path = Path.Combine(container, candidate);
+
+				if (File.Exists(path)
+				 && ((File.GetUnixFileMode(path) & AnyExecute) != 0))
+					return path;
+			}
+		}
+
+		Console.Error.WriteLine("Failed to locate a shell to run");
+		throw new NotSupportedException();
+	}
+
 	static void Main()
 	{
+		string fileName = FindShell();
+
+		Console.WriteLine("Shell: {0}", fileName);
+
 		int charWidth = Console.BufferWidth;
 		int charHeight = Console.BufferHeight;
 
@@ -34,7 +64,7 @@ class Program
 					CharacterSize = (charWidth, charHeight),
 					PixelSize = (charWidth * glyphWidth, charHeight * glyphHeight),
 				},
-				"/usr/bin/bash");
+				fileName);
 
 			Console.WriteLine("ForkPTYAndExec returned, child is {0}", result.ChildProcessID);
 			Console.Out.Flush();

@@ -1,0 +1,16 @@
+#!/bin/tcsh
+
+set arch=`uname -m`
+
+switch ( $arch )
+	case x86_64:
+	case amd64:
+		echo freebsd-x64
+		breaksw
+	case aarch64
+		echo freebsd-arm64
+		breaksw
+	default:
+		echo Unrecognized: $arch >&2
+		exit 1
+endsw

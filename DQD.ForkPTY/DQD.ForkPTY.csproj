@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>DQD.ForkPTY</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>logiclrd</Authors>
     <PackageDescription>.NET library exposing forkpty() functionality across multiple platforms</PackageDescription>
     <RepositoryUrl>https://github.com/logiclrd/DQD.ForkPTY</RepositoryUrl>
