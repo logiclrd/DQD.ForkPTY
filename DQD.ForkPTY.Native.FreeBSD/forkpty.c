@@ -1,10 +1,12 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <libutil.h>
-#include <signal.h>
-#include <string.h>
 #include <termios.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include "control_chars.h"
 
@@ -127,4 +129,7 @@ int forkpty_exec(int charWidth, int charHeight, int pixelWidth, int pixelHeight,
 	// forkpty has already stuffed the PTY slave FD into stdin, stdout and stderr,
 	// so all that's left to do is exec.
 	execvp(fileName, argv);
+
+	// Can only get here if an error occurred.
+	exit(errno);
 }
