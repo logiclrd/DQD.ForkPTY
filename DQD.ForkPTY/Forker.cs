@@ -24,6 +24,10 @@ public static class Forker
 
 		int childPTY, masterFD;
 
+		// Analysis isn't smart enough to tell that the else below covers this.
+		if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+			throw new PlatformNotSupportedException();
+
 		if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 		{
 			childPTY = NativeMethods.Linux.forkpty_exec(
