@@ -1,5 +1,3 @@
-#define _GNU_SOURCE
-
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <libutil.h>
@@ -7,7 +5,6 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
-#include <fcntl.h>
 
 #include "control_chars.h"
 
