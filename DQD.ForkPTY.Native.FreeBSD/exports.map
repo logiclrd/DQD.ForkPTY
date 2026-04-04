@@ -1,0 +1,5 @@
+{
+	global:
+		forkpty_exec;
+	local: *;
+};

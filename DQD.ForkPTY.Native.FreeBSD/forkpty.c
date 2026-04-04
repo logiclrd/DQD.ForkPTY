@@ -50,11 +50,8 @@ int forkpty_exec(int charWidth, int charHeight, int pixelWidth, int pixelHeight,
 		ECHOCTL |
 		IEXTEN;
 
-	char standardControlCharacters[] =
-		{ INTR, QUIT, ERASE, KILL, EOF_c, TIME, MIN, SWITCH_none, START, STOP, SUSP, EOL_NUL, REPRINT, DISCARD, WERASE, LNEXT, EOL_NUL };
-
-	for (int i=0; i < sizeof(standardControlCharacters); i++)
-		term.c_cc[i] = standardControlCharacters[i];
+	for (int i=0; ControlChars[i].index != 0; i++)
+		term.c_cc[ControlChars[i].index] = ControlChars[i].ch;
 
 	struct winsize win;
 
