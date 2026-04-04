@@ -50,6 +50,17 @@ public static class Forker
 				argv,
 				out masterFD);
 		}
+		else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+		{
+			childPTY = NativeMethods.OSX.forkpty_exec(
+				configuration.CharacterSize.Width,
+				configuration.CharacterSize.Height,
+				configuration.PixelSize.Width,
+				configuration.PixelSize.Height,
+				fileName,
+				argv,
+				out masterFD);
+		}
 		else
 			throw new PlatformNotSupportedException();
 
