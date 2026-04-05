@@ -7,7 +7,8 @@ switch ( $arch )
 	case amd64:
 		echo osx-x64
 		breaksw
-	case aarch64
+	case aarch64:
+	case arm64:
 		echo osx-arm64
 		breaksw
 	default:
